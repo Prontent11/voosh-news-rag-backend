@@ -19,7 +19,7 @@ export const qdrantClient = new QdrantClient({
 async function createCollection() {
   await qdrantClient.createCollection("news_articles", {
     vectors: {
-      size: 768, // Gemini embedding dimension
+      size: 768,
       distance: "Cosine",
     },
   });
