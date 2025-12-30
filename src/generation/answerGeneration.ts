@@ -1,13 +1,16 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import genAI from "../config/genAI";
+import dotenv from 'dotenv'
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+dotenv.config();
+
+
 
 export async function generateAnswer(
   question: string,
   contextChunks: string[]
 ): Promise<string> {
   const model = genAI.getGenerativeModel({
-    model: "gemini-pro",
+    model:'gemini-2.5-flash'
   });
 
   const context = contextChunks
@@ -18,6 +21,7 @@ export async function generateAnswer(
 You are a news assistant.
 Answer the user's question using ONLY the information from the sources below.
 If the answer is not contained in the sources, say you don't know.
+If the question is related to your introduction or greeting you so do greet and tell who you are and here you can provide news.
 
 Sources:
 ${context}

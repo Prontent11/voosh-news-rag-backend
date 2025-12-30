@@ -2,16 +2,11 @@ import Parser from "rss-parser";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { v4 as uuidv4 } from "uuid";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from 'dotenv'
 import { chunkText } from "../utils/chunkText";
 import { qdrantClient } from "../config/qdrant"
-
-
-dotenv.config({
-  path:"../../.env"
-});
-
+import genAI from "../config/genAI";
+dotenv.config();
 
 
 const parser = new Parser();
@@ -25,9 +20,7 @@ const FEEDS = [
 const MAX_ARTICLES = 50;
 const COLLECTION_NAME = "news_articles";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-// ---------------- TYPES ----------------
 
 type Article = {
   title: string;
@@ -35,7 +28,6 @@ type Article = {
   url: string;
 };
 
-// ---------------- HELPERS ----------------
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -79,7 +71,6 @@ async function fetchGuardianArticle(url: string): Promise<Article | null> {
   }
 }
 
-// ---------------- MAIN PIPELINE ----------------
 
 async function main() {
   const articles: Article[] = [];
@@ -138,7 +129,6 @@ async function main() {
   console.log("\n Ingestion + embedding complete");
 }
 
-// ---------------- RUN ----------------
 
 main().catch((err) => {
   console.error("Ingestion failed:", err);

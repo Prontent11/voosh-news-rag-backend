@@ -1,9 +1,7 @@
 import { QdrantClient } from "@qdrant/js-client-rest";
 import dotenv from 'dotenv'
 
-dotenv.config({
-  path:"../../.env"
-});
+dotenv.config();
 
 const QDRANT_URL = process.env.QDRANT_URL 
 const QDRANT_KEY=process.env.QDRANT_KEY
@@ -29,4 +27,4 @@ async function createCollection() {
   console.log("Collection created with 768-dim vectors");
 }
 
-createCollection();
+// createCollection();

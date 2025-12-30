@@ -1,6 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+import genAI from "../config/genAI";
 
 export async function embedText(text: string): Promise<number[]> {
   const model = genAI.getGenerativeModel({
