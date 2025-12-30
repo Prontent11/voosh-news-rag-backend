@@ -162,7 +162,7 @@ npx ts-node-dev src/config/qdrant.ts
 Now populate Qdrant with news data:
 
 ```bash
-npx ts-node-dev scripts/ingestNews.ts
+npx ts-node-dev scripts/inngestNews.ts
 ```
 
 **Pipeline steps:**
